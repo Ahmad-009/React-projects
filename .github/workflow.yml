@@ -1,0 +1,27 @@
+name: Devops Practice
+
+on:
+  push:
+    branch: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setting up node
+     uses: actions/setup-node@v3
+     with: 
+       node-version: 18
+
+    - name: Dependencies
+      run: npm run build
+
+    - name: Deploy to Github Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: workflow
+        folder: dist
